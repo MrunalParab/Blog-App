@@ -1,0 +1,21 @@
+User = id, name, email(username), password, about
+
+Post = post_id, title, content, image, user_id, category_id, date
+
+Comment = comment_id, comment, post_id, user_id, date
+
+Category = category_id, title
+
+Role = role_id, role_name
+------------------------------------------------------------
+1 user can have multiple posts(One to many relationship)
+
+1 user can have multiple comments(One to many relationship)
+
+1 post can have multiple comments(One to many relationship)
+
+1 category can have multiple posts(One to many relationship)
+------------------------------------------------------------------------------------------------------------------------
+Not working:-
+
+Video = 13 - Gloal Exception Handler
