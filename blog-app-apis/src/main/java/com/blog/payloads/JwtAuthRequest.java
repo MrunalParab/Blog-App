@@ -4,6 +4,7 @@ public class JwtAuthRequest {
 
 	private String username;
 	private String password;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -15,6 +16,14 @@ public class JwtAuthRequest {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public JwtAuthRequest(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+	public JwtAuthRequest() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

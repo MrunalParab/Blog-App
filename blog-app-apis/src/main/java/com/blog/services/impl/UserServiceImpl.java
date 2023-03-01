@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blog.entities.User;
@@ -23,9 +24,13 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		User user = this.dtoToUser(userDto);
+		//user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		User savedUser = this.userRepo.save(user);
 		return this.userToDto(savedUser);
 	}
@@ -36,7 +41,8 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
 		user.setName(userDto.getName());
 		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
+		user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+		//user.setPassword(userDto.getPassword());
 		user.setAbout(userDto.getAbout());
 		
 		User updatedUser= this.userRepo.save(user);
@@ -69,11 +75,11 @@ public class UserServiceImpl implements UserService {
 private User dtoToUser (UserDto userDto) {
 	User user=this.modelMapper.map(userDto, User.class);
 	
-	//user.setId(userDto.getId());
-	//user.setName(userDto.getName());
-	//user.setEmail(userDto.getEmail());
-	//user.setPassword(userDto.getPassword());
-	//user.setAbout(userDto.getAbout());
+//	user.setId(userDto.getId());
+//	user.setName(userDto.getName());
+//	user.setEmail(userDto.getEmail());
+//	user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+//	user.setAbout(userDto.getAbout());
 	return user;
 }
 

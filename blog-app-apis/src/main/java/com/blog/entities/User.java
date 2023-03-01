@@ -21,9 +21,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 
 @Entity
+@Table(name = "user")
 public class User implements UserDetails {
 	
 	@Id
@@ -73,7 +75,6 @@ public class User implements UserDetails {
 		// TODO Auto-generated constructor stub
 	}
 	public User(int id, String name, String email, String password, String about, List<Post> posts, Set<Role> roles) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;

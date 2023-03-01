@@ -1,7 +1,7 @@
 package com.blog.payloads;
 
-public class JwtAuthResponse {
-	
+public class AuthToken {
+
 	
 	private String token;
 
@@ -13,15 +13,14 @@ public class JwtAuthResponse {
 		this.token = token;
 	}
 
-	public JwtAuthResponse(String token) {
-		this.token = token;
-	}
-
-	public JwtAuthResponse() {
+	public AuthToken() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public AuthToken(String token) {
+		this.token = token;
+	}
 	
 	
 }
