@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +30,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/")
-	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
-		UserDto createUserDto = this.userService.createUser(userDto);
-		return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
-	}
+//	@PostMapping("/")
+//	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
+//		UserDto createUserDto = this.userService.createUser(userDto);
+//		return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
+//	}
 	
 	@PutMapping("/{userId}")
 	public ResponseEntity<UserDto> updateUser( @Valid @RequestBody UserDto userDto, @PathVariable Integer userId){
@@ -41,7 +42,8 @@ public class UserController {
 		return ResponseEntity.ok(updatedUser);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
+	@Secured("ADMIN_USER")
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer userId){
 		this.userService.deleteUser(userId);

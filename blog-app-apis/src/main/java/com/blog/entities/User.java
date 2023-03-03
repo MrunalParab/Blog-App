@@ -86,6 +86,15 @@ public class User implements UserDetails {
 
 
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+
+
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Post> posts = new ArrayList<>();
 	
